@@ -91,3 +91,8 @@ print cdOpTotal
 print cdOpGood
 print ctOpTotal
 print ctOpGood
+globalInfo=str(groupSign)+"\t"+str(typeSign)+"\t"+str(cdOpTotal)+"\t"+str(cdOpGood)+"\t"+str(ctOpTotal)+"\t"+str(ctOpGood)
+globalInfo+="\n"
+print globalInfo
+#globalFile=open("globalInfo.txt","a")
+#globalFile.write(globalInfo)
