@@ -59,7 +59,7 @@ print "seqString is:", seqString
 #str.strip() to remove leading and trailing whitespace characters
 # We can use multiple assignment to parse split elements: a,b,c = [1,2,3]
 
-traceFile="simulation_log_standard.txt"
+traceFile="../simulation_log_standard.txt"
 #traceList=f.readlines()#List of Strings, each element is a line
 #delimiterNumber=[i for i,line in enumerate(traceList) if "Simulation" in line]
 #print delimiterNumber
