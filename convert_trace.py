@@ -41,6 +41,42 @@ def extractInfoSimple(operationList):
         time.append(int(t[1:]))
     return goodRes, badRes, tGood, tBad, time
 
+def extractInfoComment(operationList,ctErrorTime):
+    # Requires a list which contains the operations per element
+    # Requires a error time list ex. [3,5,7]
+    # Returns a tuple containing potentially useful infomation
+    # Comment means specially for comment tests
+    score=-2#initial score, assuming that the error not found
+    findError=false
+    goodRes=0#total number of good results
+    badRes=0#total number of bad results
+    time=[]#time when there is an operation
+    tGood=[]#time when there is a good operation
+    tBad=[]#time when there is a bad operation
+    for line in operationList:
+        if "Simulation" in line:
+            continue
+        who,t,op,res = line.strip().split(" ")
+        if res == "NOK":
+            if int(t[1:]) not in ctErrorTime:
+                tBad.append(int(t[1:]))
+                score -= 1
+            elif not findError:
+                findError = true
+                tGood.append(int(t[1:]))
+                score += 2
+            else:
+                # error already found
+                tGood.append(int(t[1:]))
+        if res == "OK":
+            if int(t[1:]) in ctErrorTime:
+                tBad.append(int(t[1:]))
+                tBad.append(int(t[1:]))
+                score -= 1
+            else:
+                tGood.append(int(t[1:]))
+    return goodRes, badRes, tGood, tBad, time, score
+
 #sample=metaTraceList[4]
 #print info
 #print info[1]
