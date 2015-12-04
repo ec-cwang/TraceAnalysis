@@ -19,9 +19,10 @@ def splitTrace(traceFile):
     f.close()
     return metaTraceList
 
-def extractInfo(operationList):
+def extractInfoSimple(operationList):
     # Requires a list which contains the operations per element
     # Returns a tuple containing potentially useful infomation
+    # Simple means "OK" is "Good", "NOK" is "Bad"
     goodRes=0#total number of good results
     badRes=0#total number of bad results
     time=[]#time when there is an operation
@@ -67,7 +68,7 @@ traceFile="../simulation_log_standard.txt"
 metaList=splitTrace(traceFile)
 
 # For individual analysis
-infoIndiv=extractInfo(open(traceFile,"r").readlines())
+infoIndiv=extractInfoSimple(open(traceFile,"r").readlines())
 #print infoIndiv
 
 # Prepare For global analysis, conversion to 1 line
@@ -78,9 +79,9 @@ print seqList
 print groupSign
 print typeSign
 cdOpList=metaList[seqList.index("cd")]
-cdInfo=extractInfo(cdOpList)
+cdInfo=extractInfoSimple(cdOpList)
 ctOpList=metaList[seqList.index("ct")]
-ctInfo=extractInfo(ctOpList)
+ctInfo=extractInfoSimple(ctOpList)
 print cdInfo
 print ctInfo
 cdOpTotal=cdInfo[0]+cdInfo[1]
