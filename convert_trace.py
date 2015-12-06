@@ -60,21 +60,28 @@ def extractInfoComment(operationList,ctErrorTime):
         if res == "NOK":
             if int(t[1:]) not in ctErrorTime:
                 tBad.append(int(t[1:]))
+                badRes += 1
                 score -= 1
             elif not findError:
                 findError = True
                 tGood.append(int(t[1:]))
+                goodRes += 1
                 score += 2
             else:
                 # error already found
                 tGood.append(int(t[1:]))
+                goodRes += 1
         if res == "OK":
             if int(t[1:]) in ctErrorTime:
                 tBad.append(int(t[1:]))
                 tBad.append(int(t[1:]))
+                badRes += 2
                 score -= 1
             else:
                 tGood.append(int(t[1:]))
+                goodRes += 1
+
+        time.append(int(t[1:]))
     return goodRes, badRes, tGood, tBad, time, score
 
 #sample=metaTraceList[4]
@@ -118,18 +125,21 @@ print typeSign
 cdOpList=metaList[seqList.index("cd")]
 cdInfo=extractInfoSimple(cdOpList)
 ctOpList=metaList[seqList.index("ct")]
-ctInfo=extractInfoSimple(ctOpList)
+ctInfo=extractInfoComment(ctOpList,ctErrorTime)
 print cdInfo
 print ctInfo
 cdOpTotal=cdInfo[0]+cdInfo[1]
 cdOpGood=cdInfo[0]
-ctOpTotal=ctInfo[0]+ctInfo[1]
+cdScore = round(float(cdOpGood*100/cdOpTotal),2)
+#ctOpTotal=ctInfo[0]+ctInfo[1]
 ctOpGood=ctInfo[0]
 print cdOpTotal
 print cdOpGood
-print ctOpTotal
+print cdScore
+#print ctOpTotal
 print ctOpGood
-globalInfo=str(groupSign)+"\t"+str(typeSign)+"\t"+str(cdOpTotal)+"\t"+str(cdOpGood)+"\t"+str(ctOpTotal)+"\t"+str(ctOpGood)
+globalInfo=str(groupSign)+"\t"
+globalInfo+=str(typeSign)+"\t"
 globalInfo+="\n"
 print globalInfo
 #globalFile=open("globalInfo.txt","a")
