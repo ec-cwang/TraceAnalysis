@@ -47,7 +47,7 @@ def extractInfoComment(operationList,ctErrorTime):
     # Returns a tuple containing potentially useful infomation
     # Comment means specially for comment tests
     score=-2#initial score, assuming that the error not found
-    findError=false
+    findError=False
     goodRes=0#total number of good results
     badRes=0#total number of bad results
     time=[]#time when there is an operation
@@ -62,7 +62,7 @@ def extractInfoComment(operationList,ctErrorTime):
                 tBad.append(int(t[1:]))
                 score -= 1
             elif not findError:
-                findError = true
+                findError = True
                 tGood.append(int(t[1:]))
                 score += 2
             else:
@@ -90,6 +90,7 @@ print "Hello!"
 print "你好，世界！"
 
 scriptName, typeTest, seqString = argv
+ctErrorTime=[21,22]
 print "typeTest is:", typeTest
 print "seqString is:", seqString
 
