@@ -80,19 +80,9 @@ def extractInfoComment(operationList,ctErrorTime):
             else:
                 tGood.append(int(t[1:]))
                 goodRes += 1
-
         time.append(int(t[1:]))
-    return goodRes, badRes, tGood, tBad, time, score
+    return goodRes, badRes, tGood, tBad, time, score, findError
 
-#sample=metaTraceList[4]
-#print info
-#print info[1]
-#
-#print goodRes
-#print badRes
-#print len(sample)-1
-#print goodRes+badRes
-#print time
 print "Hello!"
 print "你好，世界！"
 
@@ -112,7 +102,7 @@ traceFile="../simulation_log_standard.txt"
 metaList=splitTrace(traceFile)
 
 # For individual analysis
-infoIndiv=extractInfoSimple(open(traceFile,"r").readlines())
+#infoIndiv=extractInfoSimple(open(traceFile,"r").readlines())
 #print infoIndiv
 
 # Prepare For global analysis, conversion to 1 line
@@ -130,17 +120,25 @@ print cdInfo
 print ctInfo
 cdOpTotal=cdInfo[0]+cdInfo[1]
 cdOpGood=cdInfo[0]
-cdScore = round(float(cdOpGood*100/cdOpTotal),2)
+cdScore = round(cdOpGood*100.00/cdOpTotal,2)
 #ctOpTotal=ctInfo[0]+ctInfo[1]
 ctOpGood=ctInfo[0]
+ctSucc = ctInfo[6]
+ctScore = ctInfo[5]
 print cdOpTotal
 print cdOpGood
 print cdScore
 #print ctOpTotal
 print ctOpGood
+print ctSucc
+print ctScore
 globalInfo=str(groupSign)+"\t"
 globalInfo+=str(typeSign)+"\t"
+globalInfo+=("1" if ctSucc else "0")+"\t"
+globalInfo+=str(ctScore)+"\t"
+globalInfo+=str(cdScore)+"\t"
 globalInfo+="\n"
 print globalInfo
-#globalFile=open("globalInfo.txt","a")
-#globalFile.write(globalInfo)
+globalFile=open("../globalInfo.txt","a")
+globalFile.write(globalInfo)
+globalFile.close()
