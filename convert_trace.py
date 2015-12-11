@@ -87,7 +87,7 @@ print "Hello!"
 print "你好，世界！"
 
 scriptName, typeTest, seqString = argv
-ctErrorTime=[21,22]
+ctErrorTime=[20,21]
 print "typeTest is:", typeTest
 print "seqString is:", seqString
 
