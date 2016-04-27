@@ -9,7 +9,7 @@ def splitTrace(traceFile):
     metaTraceList=[]
     start=0
     for i,line in enumerate(traceList):
-        if "Simulation" in line:
+        if ("Simulation" in line) or ("Test" in line):
             if i==0:
                 continue
             #list[first:last] last in not included
@@ -29,7 +29,7 @@ def extractInfoSimple(operationList):
     tGood=[]#time when there is a good operation
     tBad=[]#time when there is a bad operation
     for line in operationList:
-        if "Simulation" in line:
+        if ("Simulation" in line) or ("Test" in line) or ("Vitesse" in line):
             continue
         who,t,op,res = line.strip().split(" ")
         if res == "OK":
@@ -54,7 +54,7 @@ def extractInfoComment(operationList,ctErrorTime):
     tGood=[]#time when there is a good operation
     tBad=[]#time when there is a bad operation
     for line in operationList:
-        if "Simulation" in line:
+        if ("Simulation" in line) or ("Test" in line) or ("Vitesse" in line):
             continue
         who,t,op,res = line.strip().split(" ")
         if res == "NOK":
